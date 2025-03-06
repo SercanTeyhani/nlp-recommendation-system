@@ -3,10 +3,10 @@ import pickle
 import speech_recognition as sr
 from google import genai
 import io
-import config
 
-# Google Gemini API anahtarını ekleyin
-API_KEY = config.API_KEY
+# Streamlit secrets üzerinden API anahtarını al
+API_KEY = st.secrets["API_KEY"]  # Streamlit Secrets'ten API_KEY değerini al
+
 st.title("🧑‍💻 Online DataMentor🚀")
 st.write("Bu uygulama, DataMentor modeli ile veri bilimi alanında iş başvuru metinlerinde en sık kullanılan kelimeleri analiz eder ve kariyer yolunuzu çizmeye yardımcı olur.")
 
@@ -43,7 +43,7 @@ if st.button("🔍 Kariyer Planımı Oluştur"):
     if not user_input:
         st.warning("⚠️ Lütfen kendinizle ilgili bilgileri girin!")
     else:
-        with open("bertopic_model.pkl", "rb") as file:
+        with open("data-mentor.pkl", "rb") as file:
             topic_model = pickle.load(file)
 
         topic_0_words = [word[0] for word in topic_model.get_topic(0)[:20]]
@@ -65,3 +65,4 @@ if st.button("🔍 Kariyer Planımı Oluştur"):
 
         st.subheader("📌 Online DataMentor Tavsiyeleri:")
         st.write(response.text)
+
