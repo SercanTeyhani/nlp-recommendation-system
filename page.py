@@ -46,7 +46,7 @@ if st.button("🔍 Kariyer Planımı Oluştur"):
         with open("data-mentor.pkl", "rb") as file:
             topic_model = pickle.load(file)
 
-        topic_0_words = [word[0] for word in topic_model.get_topic(0)[:20]]
+        topic_0_words = [word[0] for word in topic_model.get_topic(1)[:20]]
 
         prompt = f"""
         📊 İş ilanlarında en çok geçen veri bilimi terimleri:
