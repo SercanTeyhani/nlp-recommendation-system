@@ -4,44 +4,44 @@ import speech_recognition as sr
 from google import genai
 import io
 
-# Streamlit secrets üzerinden API anahtarını al
-API_KEY = st.secrets["API_KEY"]  # Streamlit Secrets'ten API_KEY değerini al
+# Get API key from Streamlit secrets
+API_KEY = st.secrets["API_KEY"]  # Retrieve API_KEY from Streamlit Secrets
 
 st.title("🧑‍💻 Online DataMentor🚀")
-st.write("Bu uygulama, DataMentor modeli ile veri bilimi alanında iş başvuru metinlerinde en sık kullanılan kelimeleri analiz eder ve kariyer yolunuzu çizmeye yardımcı olur.")
+st.write("This application analyzes the most frequently used words in data science job application texts using the DataMentor model and helps you map out your career path.")
 
-# Kullanıcıdan bilgi alın
-user_input = st.text_area("📌 Veri Bilimi ile alakalı tecrübelerinizden bahsedin :)")
+# Get user input
+user_input = st.text_area("📌 Describe your experience in data science :)")
 
-# 🎤 Ses Kaydı Al
-st.write("🎙️ Ses ile giriş yapmak için aşağıdaki butona basıp konuşabilirsiniz.")
-audio_input = st.audio_input("Ses kaydını başlatmak için buraya tıklayın")
+# 🎤 Record Audio
+st.write("🎙️ Click the button below to speak and input your voice.")
+audio_input = st.audio_input("Click here to start recording")
 
-# Eğer ses kaydı varsa, bunu işleyin
+# Process the audio input if available
 if audio_input:
-    st.write("✅ Ses kaydınız alındı.")
+    st.write("✅ Your voice has been recorded.")
     
-    # Ses kaydını byte formatında almak ve işlemek
+    # Convert audio input to bytes for processing
     audio_bytes = io.BytesIO(audio_input.getvalue())
     recognizer = sr.Recognizer()
     
     try:
         with sr.AudioFile(audio_bytes) as source:
-            audio = recognizer.record(source)  # Ses kaydını dinle
+            audio = recognizer.record(source)  # Listen to the recorded audio
         
-        # Google API üzerinden metne dönüştürme
-        text_from_speech = recognizer.recognize_google(audio, language="tr-TR")
-        st.success(f"🎤 Ses metne dönüştürüldü: {text_from_speech}")
-        user_input += " " + text_from_speech  # Ses kaydını metne ekle
+        # Convert speech to text using Google API
+        text_from_speech = recognizer.recognize_google(audio, language="en-US")
+        st.success(f"🎤 Speech converted to text: {text_from_speech}")
+        user_input += " " + text_from_speech  # Append speech text to input
     except sr.UnknownValueError:
-        st.error("❌ Ses anlaşılamadı, lütfen tekrar deneyin.")
+        st.error("❌ Could not understand the audio, please try again.")
     except sr.RequestError:
-        st.error("⚠️ Google API'ye bağlanılamadı, internet bağlantınızı kontrol edin.")
+        st.error("⚠️ Could not connect to Google API, check your internet connection.")
 
-# Kullanıcı giriş yapmadan önce model çalışmaz
-if st.button("🔍 Kariyer Planımı Oluştur"):
+# Ensure user input before running the model
+if st.button("🔍 Generate My Career Plan"):
     if not user_input:
-        st.warning("⚠️ Lütfen kendinizle ilgili bilgileri girin!")
+        st.warning("⚠️ Please enter information about yourself!")
     else:
         with open("data-mentor.pkl", "rb") as file:
             topic_model = pickle.load(file)
@@ -49,12 +49,12 @@ if st.button("🔍 Kariyer Planımı Oluştur"):
         topic_0_words = [word[0] for word in topic_model.get_topic(1)[:20]]
 
         prompt = f"""
-        📊 İş ilanlarında en çok geçen veri bilimi terimleri:
+        📊 Most common data science terms in job postings:
         {', '.join(topic_0_words)}
 
-        🏆 Benim becerilerim ve deneyimlerim: {user_input}
+        🏆 My skills and experiences: {user_input}
 
-        💡 Bu bilgiler doğrultusunda benim için detaylı bir **Data Scientist kariyer yolu** çizebilir misin? 
+        💡 Based on this information, can you generate a detailed **Data Scientist career path** for me? 
         """
 
         client = genai.Client(api_key=API_KEY)
@@ -63,6 +63,5 @@ if st.button("🔍 Kariyer Planımı Oluştur"):
             contents=prompt
         )
 
-        st.subheader("📌 Online DataMentor Tavsiyeleri:")
+        st.subheader("📌 Online DataMentor Recommendations:")
         st.write(response.text)
-
