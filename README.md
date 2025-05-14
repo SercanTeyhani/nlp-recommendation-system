@@ -35,7 +35,7 @@ It leverages:
 | NLP Modeling        | `BERTopic`, `spaCy`         |
 | Semantic Reasoning  | `Gemini API` (Google's LLM)            |
 | Visualization       | `WordCloud`              |
-| Deployment (optional) | `Streamlit`            |
+| Deployment | `Streamlit`            |
 
 ---
 
