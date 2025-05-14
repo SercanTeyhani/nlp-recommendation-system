@@ -1,6 +1,9 @@
 # 🧠 Career Path Recommendation System with NLP & Gemini API
 
-🧪 **Live Demo**: [data-mentor.streamlit.app](https://data-mentor.streamlit.app/)
+## 🌐 Live Demo
+
+🖥️ Try the application here:  
+👉 [https://data-mentor.streamlit.app/](https://data-mentor.streamlit.app/)
 
 > *“What’s the best career path for me in Data Science?”*  
 > This project answers that question using real job postings, NLP, and LLM-powered reasoning.
