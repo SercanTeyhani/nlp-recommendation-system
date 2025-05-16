@@ -1,4 +1,4 @@
-# 🧠 Career Path Recommendation System with NLP & Gemini API
+# 🧠 Career Path Recommendation System with NLP & Gemini API & LinkedIn
 
 ## 🌐 Live Demo
 
