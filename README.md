@@ -35,9 +35,9 @@ It leverages:
 | Component           | Tool / Library                         |
 |--------------------|----------------------------------------|
 | Data Collection     | `Selenium`, `BeautifulSoup` (LinkedIn scraping) |
-| NLP Modeling        | `BERTopic`, `spaCy`         |
+| NLP Modeling        | `BERTopic`, `spaCy`,'N-grams','parameters'|
 | Semantic Reasoning  | `Gemini API` (Google's LLM)            |
-| Visualization       | `WordCloud`              |
+| Visualization       | `WordCloud`, c-TF-IDF              |
 | Deployment | `Streamlit`            |
 
 ---
