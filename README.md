@@ -4,6 +4,7 @@
 
 🖥️ Try the application here:  
 👉 [https://data-mentor.streamlit.app/](https://data-mentor.streamlit.app/)
+
 🖥️Read the full article on Medium:
 
 👉https://medium.com/@sercanteyhani/from-linkedin-profiles-to-career-paths-an-llm-powered-recommendation-system-e2e2d9f22ed5
