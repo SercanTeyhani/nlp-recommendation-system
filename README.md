@@ -46,4 +46,7 @@ It leverages:
 
 ---
 
+## 📸 Project Screenshots
 
+![Screenshot 1](screenshots/data-mentor-example.png)  
+![Screenshot 2](screenshots/data-mentor-example2.png)
